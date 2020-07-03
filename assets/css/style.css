@@ -1,0 +1,105 @@
+
+html {
+    background-color: #e5edf1;
+}
+
+body {
+  font-family: Roboto, sans-serif;
+}
+a {
+  color: #369;
+}
+
+p {
+    font-family: Roboto, sans-serif;
+}
+.note {
+  font-family: Roboto, sans-serif;
+  width: 500px;
+  margin: 50px auto;
+  font-size: 1.1em;
+  color: #333;
+  text-align: justify;
+}
+
+#drop-area {
+  transition-duration: 0.3s;
+  font-family: Roboto, sans-serif;
+  font-size: 17px;
+  box-shadow: 0 0 0 16px #c8dadf ;
+  background-color: #c8dadf;
+  border: 2px dashed #92b0b3;
+  border-radius: 20px;
+  width: 650px;
+  margin: 50px auto;
+  padding: 40px;
+  padding-top:60px;
+  padding-bottom:60px;
+  position: absolute;
+  top: 30%;
+  left:50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+#drop-area:hover {
+  border-color: gray;
+  transition-duration: 0.5s;
+}
+p {
+  margin-top: 0;
+}
+.my-form, .setup-form {
+  margin-bottom: 10px;
+}
+#gallery {
+  margin-top: 10px;
+  color:forestgreen;
+}
+#gallery img {
+  
+  width: 150px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+.label {
+  display: inline-block;
+  padding: 10px;
+  background: #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width:6em;
+  text-align: center;
+  font-size: 16px;
+}
+
+.buttons {
+  display: inline-block;
+  padding: 10px;
+  background: #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width:6em;
+  text-align: center;
+  margin-top: 5px;
+  font-size: 16px;
+}
+
+.buttons:hover {
+    background: #ddd;
+}
+.label:hover {
+  background: #ddd;
+}
+#fileElem {
+  display: none;
+}
+
+progress {
+  margin-left:10px;
+  vertical-align: -0.5em;
+}

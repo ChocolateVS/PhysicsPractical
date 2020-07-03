@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>Physics Practical Grapher</title>
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css">   
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    </header>
+
+    <body>
+        <main>
+            <form class="box" method="post" action="" enctype="multipart/form-data">
+                <div id="drop-area">
+                   <div id="upload-area">
+                        <form class="my-form">
+                            <p>Please upload a <b>csv</b> file with the correct data format, an example may be found here (you can drag and drop here)</p>
+                            <input type="file" id="fileElem" accept="*/*,csv" onchange="handleFiles(this.files)">
+                            <label class="label" for="fileElem">Upload CSV</label>
+                        </form>
+                        <progress id="progress-bar" style="height:30px" max=100 value=0></progress>
+                        <div id="gallery"/>
+                    </div>
+                </div> 
+            <form>
+            <div id="setup-area">
+                <form class="setup-form">                       
+                    
+                    Please enter a graph <b>title: </b><input type="text" id="graphTitle"><br>
+                    
+                    Select the <b>trial</b> columns:
+                    <span id="trials">
+                        
+                    </span><br>
+                    
+                    Select the <b>average</b> column:
+                    <select id="averageSelect">
+                        <option value="0">Auto Calculate</option>
+                    </select><br>
+                    
+                    Please enter a <b>title</b> for the <b>x axis</b>: <input type="text" id="xAxisTitle"><br>
+                    Please enter a <b>title</b> for the <b>y axis</b>: <input type="text" id="yAxisTitle"><br>
+                    Which data would you like on the (horizontal) x axis: 
+                    <select id="xAxisSelect">
+                        <option id="autoC" value="-1">Average (Auto Calculated)</option>
+                    </select><br>
+                    Which data would you like on the (veritcal) y axis: 
+                    <select id="yAxisSelect">
+                        <option id="autoC" value="-1">Average (Auto Calculated)</option>
+                    </select><br>
+
+                    Select the <b>absolute margin of error</b> column:
+                    <select id="amoeSelect">
+                        <option value="0">Auto Calculate</option>
+                    </select><br>
+                    
+                    Select the <b>relative margin of error</b> column:
+                    <select id="rmoeSelect">
+                        <option value="0">Auto Calculate</option>
+                    </select><br>
+                    
+                    <input type="checkbox" id="displayData" name="displayData" value="0" checked>
+                    <label for="displayData"> Display important data and equations on graph</label><br>
+                    
+                    <input type="checkbox" id="displayTrend" name="displayTrend" value="0" checked>
+                    <label for="displayTrend"> Show Trendlines</label><br>
+                    
+                    <input type="checkbox" id="displayMoe" name="displayMoe" value="0" checked>
+                    <label for="displayMoe"> Show Margin of error bars</label><br>
+                    
+                    <input type="checkbox" id="displayTable" name="displayTable" value="0" checked>
+                    <label for="displayTable"> Generate table of data</label><br>
+                    <div class="button" id="generate-button"><input type="button" class="buttons" onclick="generate()" value="Generate"/></div> 
+                </form>
+            </div>
+            
+            <div id="graph-area">
+                <canvas id="myChart" width="400" height="400"></canvas>
+                <script src="assets/js/graph.js"></script>
+            </div>
+            <div class="button" id="continue-button"><input type="button" class="buttons" onclick="cont()" value="Continue"/></div>   
+                      
+        </main>
+    </body> 
+    <script src="assets/js/script.js"></script> 
+</html>
