@@ -269,8 +269,8 @@ function generate() {
         pointsArray.push({x:xData[i], y:yData[i]});
     }
     
-    let xAxisTitle = document.getElementById("xAxisTitle");
-    let yAxisTitle = document.getElementById("yAxisTitle");
+    let xAxisTitle = document.getElementById("xAxisTitle").value;
+    let yAxisTitle = document.getElementById("yAxisTitle").value;
     let graphName = document.getElementById("graphTitle").value;
     drawGraph(graphName, xAxisTitle, yAxisTitle, pointsArray);
 }
@@ -284,25 +284,48 @@ function drawGraph(graphName, xAxisTitle, yAxisTitle, pointsArray) {
     type: 'scatter',
         data: {
             datasets: [{
-                label: graphName,
+                label: "DUNNO",
                 data: 
-                    pointsArray
-            }]
+                    pointsArray,
+                backgroundColor: 'rgba(255, 30, 255, 0.6)',
+                borderColor: 'rgba(255, 30, 255, 1)',
+                borderWidth: 1,
+                pointWidth: 3
+            }],
+            
         },
         options: {
+            title: {
+                display: true,
+                text: graphName
+            },
             scales: {
                 yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: yAxisTitle
+                    },
                     ticks: {
                         beginAtZero: true
                     }
                 }],
                 xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: xAxisTitle
+                    },
                     type: 'linear',
                     position: 'bottom',
                     ticks: {
                         beginAtZero: true
                     }     
                 }]
+            },
+            plugins: {
+              chartJsPluginErrorBars: {
+                width: '60%',
+                //color: 'darkgray'
+              }
             }
         }
     });
