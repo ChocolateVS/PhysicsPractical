@@ -152,8 +152,8 @@ function parseCSV(text, lineTerminator, cellTerminator) {
 
 function sortData() {
     graphTitle.value = dataArray[0].join().replace(/,/g, '');   
-    xAxisTitle.value = dataArray[2][0];
-    yAxisTitle.value = "Average " + dataArray[1].join().replace(/,/g, '');
+    yAxisTitle.value = dataArray[2][0];
+    xAxisTitle.value = "Average " + dataArray[1].join().replace(/,/g, '');
     
     
     for (i = 0; i < dataArray[2].length; i++) {
@@ -269,14 +269,15 @@ function generate() {
         pointsArray.push({x:xData[i], y:yData[i]});
     }
     
-    let xAxisTitle = document.getElementById("xAxisTitle").value;
-    let yAxisTitle = document.getElementById("yAxisTitle").value;
+    let xAxisTitle = document.getElementById("xAxisTitle").value + " in (" + document.getElementById("xAxisUnit").value + ")";
+    let yAxisTitle = document.getElementById("yAxisTitle").value + " in (" + document.getElementById("yAxisUnit").value + ")";
+    let dataLabel = document.getElementById("yAxisTitle").value + " vs " + document.getElementById("xAxisTitle").value;
     let graphName = document.getElementById("graphTitle").value;
-    drawGraph(graphName, xAxisTitle, yAxisTitle, pointsArray);
+    drawGraph(graphName, xAxisTitle, yAxisTitle, pointsArray, dataLabel);
 }
 /////////GRAPH//////////////
 
-function drawGraph(graphName, xAxisTitle, yAxisTitle, pointsArray) {
+function drawGraph(graphName, xAxisTitle, yAxisTitle, pointsArray, dataLabel) {
     graphArea.style.display = "block";
     console.log(pointsArray);
     var ctx = document.getElementById('myChart').getContext('2d');
@@ -284,7 +285,7 @@ function drawGraph(graphName, xAxisTitle, yAxisTitle, pointsArray) {
     type: 'scatter',
         data: {
             datasets: [{
-                label: "DUNNO",
+                label: dataLabel,
                 data: 
                     pointsArray,
                 backgroundColor: 'rgba(255, 30, 255, 0.6)',
@@ -322,6 +323,9 @@ function drawGraph(graphName, xAxisTitle, yAxisTitle, pointsArray) {
                 }]
             },
             plugins: {
+                datalabels: {
+                    display: false,
+                },
               chartJsPluginErrorBars: {
                 width: '60%',
                 //color: 'darkgray'
