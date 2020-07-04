@@ -2,8 +2,11 @@
 <html>
     <header>
         <title>Physics Practical Grapher</title>
-        <link rel="stylesheet" type="text/css" href="assets/css/style.css">   
+        <link rel="stylesheet" type="text/css" href="assets/css/style.css"> 
         <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script src="https://cdn.bootcss.com/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+        <script src="https://cdn.bootcss.com/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
     </header>
 
     <body>
@@ -71,14 +74,17 @@
                     <div class="button" id="generate-button"><input type="button" class="buttons" onclick="generate()" value="Generate"/></div> 
                 </form>
             </div>
-            
-            <div id="graph-area">
-                <canvas id="myChart" width="400" height="400"></canvas>
-                <script src="assets/js/graph.js"></script>
-            </div>
+            <div id="graph">
+                <div id="graph-area">
+                    <canvas id="myChart" width="400" height="400"></canvas>
+                    <script src="assets/js/graph.js"></script>
+                </div>
+                <div class="button" id="download-button"><input type="button" class="buttons" onclick="downloadGraph()" value="Download"/></div>  
+            </div> 
             <div class="button" id="continue-button"><input type="button" class="buttons" onclick="cont()" value="Continue"/></div>   
                       
         </main>
     </body> 
     <script src="assets/js/script.js"></script> 
+    <script src="https://rawgit.com/chartjs/chartjs-plugin-annotation/master/chartjs-plugin-annotation.js"></script>
 </html>

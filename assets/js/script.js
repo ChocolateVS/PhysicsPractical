@@ -6,6 +6,7 @@ let graphArea = document.getElementById("graph-area");
 
 let continueDiv = document.getElementById("continue-button");
 let generateDiv = document.getElementById("generate-button");
+let downloadDiv = document.getElementById("download-button");
 
 let dataArray = [];
 
@@ -16,6 +17,7 @@ let numLines = 0;
 let trialsAvg = [];
 
 continueDiv.style.display = "none";
+downloadDiv.style.display = "none";
 setupArea.style.display = "none";
 graphArea.style.display = "none";
 
@@ -207,6 +209,10 @@ function sortData() {
     
 }
 let averages = [];
+let xAxisTitle = "";
+let yAxisTitle = "";
+let graphName = "";
+let dataLabel = "";
 function generate() {
     setupArea.style.display = "none";
     var pointsArray = [];
@@ -261,80 +267,55 @@ function generate() {
             yData.push(y); 
         }
     }
-    console.log(xData, yData);
-    
     //var xAxisData = dataArray[document.getElementById("xAxisTitle")];
     //var yAxisData = 
+
+    xAxisTitle = document.getElementById("xAxisTitle").value + " in (" + document.getElementById("xAxisUnit").value + ")";
+    yAxisTitle = document.getElementById("yAxisTitle").value + " in (" + document.getElementById("yAxisUnit").value + ")";
+    
+    pointsArray.push([xAxisTitle, yAxisTitle]);
+    
     for (i = 0; i < xData.length; i++) {
-        pointsArray.push({x:xData[i], y:yData[i]});
+        //pointsArray.push({x:xData[i], y:yData[i]});
+        pointsArray.push([xData[i], yData[i]]);
     }
     
-    let xAxisTitle = document.getElementById("xAxisTitle").value + " in (" + document.getElementById("xAxisUnit").value + ")";
-    let yAxisTitle = document.getElementById("yAxisTitle").value + " in (" + document.getElementById("yAxisUnit").value + ")";
-    let dataLabel = document.getElementById("yAxisTitle").value + " vs " + document.getElementById("xAxisTitle").value;
-    let graphName = document.getElementById("graphTitle").value;
+    dataLabel = document.getElementById("yAxisTitle").value + " vs " + document.getElementById("xAxisTitle").value;
+    graphName = document.getElementById("graphTitle").value;
     drawGraph(graphName, xAxisTitle, yAxisTitle, pointsArray, dataLabel);
 }
 /////////GRAPH//////////////
 
 function drawGraph(graphName, xAxisTitle, yAxisTitle, pointsArray, dataLabel) {
+    var data2 = pointsArray;
     graphArea.style.display = "block";
-    console.log(pointsArray);
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var scatterChart = new Chart(ctx, {
-    type: 'scatter',
-        data: {
-            datasets: [{
-                label: dataLabel,
-                data: 
-                    pointsArray,
-                backgroundColor: 'rgba(255, 30, 255, 0.6)',
-                borderColor: 'rgba(255, 30, 255, 1)',
-                borderWidth: 1,
-                pointWidth: 3
-            }],
-            
-        },
-        options: {
-            title: {
-                display: true,
-                text: graphName
-            },
-            scales: {
-                yAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: yAxisTitle
-                    },
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }],
-                xAxes: [{
-                    scaleLabel: {
-                        display: true,
-                        labelString: xAxisTitle
-                    },
-                    type: 'linear',
-                    position: 'bottom',
-                    ticks: {
-                        beginAtZero: true
-                    }     
-                }]
-            },
-            plugins: {
-                datalabels: {
-                    display: false,
-                },
-              chartJsPluginErrorBars: {
-                width: '60%',
-                //color: 'darkgray'
-              }
-            }
-        }
-    });
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {      
+        var data = google.visualization.arrayToDataTable(data2)
+
+        var options = {
+          title: graphName,
+          hAxis: {title: xAxisTitle},
+          vAxis: {title: yAxisTitle},
+          legend: 'none'
+        };
+
+        var chart = new google.visualization.ScatterChart(document.getElementById('graph-area'));
+
+        chart.draw(data, options);
+    }
+   
+    downloadDiv.style.display = "block";
 }
 
+function downloadGraph() {
+    var node = document.getElementById('graph-area');
+    console.log("DOWLOADING??");
+    domtoimage.toBlob(document.getElementById('graph-area')).then(function(blob) {
+        window.saveAs(blob, dataLabel + '.png');
+    });
+}
 //TOP LINE MUST CONTAIN ONLY THE GRAPH TITLE S
 //SECOND LINE MUST CONTAIN ONLY LABEL FOR Y AXIS
 //THIRD LINE MUST CONTAIN A LABEL FOR EACH COLUMN, COLUMS CAN BE IN ANY ORDER
